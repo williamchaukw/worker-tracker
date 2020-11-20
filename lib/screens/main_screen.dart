@@ -211,19 +211,32 @@ class _MainScreenState extends State<MainScreen> {
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 30),
                     child: _isScanned
-                        ? RichText(
-                            text: TextSpan(
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                ),
-                                children: [
-                                TextSpan(text: 'Location: '),
-                                TextSpan(
-                                    text: _scanResultString,
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold))
-                              ]))
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              RichText(
+                                  text: TextSpan(
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                      ),
+                                      children: [
+                                    TextSpan(text: 'Location: '),
+                                    TextSpan(
+                                        text: _scanResultString,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold))
+                                  ])),
+                              IconButton(
+                                  icon: Icon(Icons.delete, color: Colors.red),
+                                  onPressed: () {
+                                    setState(() {
+                                      _scanResultString = '';
+                                      _isScanned = false;
+                                    });
+                                  })
+                            ],
+                          )
                         : RaisedButton(
                             child: Text('Scan QR'),
                             onPressed: () async {
